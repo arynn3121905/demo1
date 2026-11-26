@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>SignalDesk · Internal Security</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <aside class="sidebar">
+    <a class="brand" href="#"><span class="brand-mark">S</span><span>signal<span class="brand-light">desk</span><small>SECURITY OPERATIONS</small></span></a>
+    <div class="nav-label">WORKSPACE</div>
+    <a class="nav-item active" href="#queue"><span class="nav-icon">▦</span> Reports <span class="nav-count" id="navCount">0</span></a>
+    <a class="nav-item" href="#dashboard"><span class="nav-icon">◫</span> Overview</a>
+    <div class="sidebar-bottom"><div class="secure-tag"><span class="green-dot"></span> Internal workspace</div><div class="user-chip"><div class="avatar" id="avatar">E</div><div><strong id="userName">Employee</strong><small>DEMO ACCESS</small></div><span class="chevrons">⌃<br>⌄</span></div></div>
+  </aside>
+  <main class="main">
+    <header class="topbar"><div class="crumb">Workspace <span>/</span> <b>Reports</b></div><div class="top-actions"><span class="demo-pill"><span></span> DEMO ENVIRONMENT</span><label class="role-picker"><span>Viewing as</span><select id="roleSelect"><option>Employee</option><option>Security</option><option>Admin</option></select></label><button class="icon-button" title="Notifications">♧<i></i></button></div></header>
+    <section class="content" id="dashboard">
+      <div class="page-heading"><div><div class="eyebrow">SECURITY PROGRAM</div><h1>Vulnerability reports</h1><p class="subtitle">A clear view of every signal. A safer path to resolution.</p></div><button class="primary-button" id="openModal"><span>＋</span> New report</button></div>
+      <div class="summary-grid">
+        <article class="stat-card"><div class="stat-top"><span>Total reports</span><span class="stat-symbol purple">▤</span></div><div class="stat-number" id="totalStat">—</div><div class="stat-foot"><span class="trend">↗</span> All submissions</div></article>
+        <article class="stat-card"><div class="stat-top"><span>Open reports</span><span class="stat-symbol blue">◷</span></div><div class="stat-number" id="openStat">—</div><div class="stat-foot">Awaiting resolution</div></article>
+        <article class="stat-card"><div class="stat-top"><span>In review</span><span class="stat-symbol amber">⌕</span></div><div class="stat-number" id="reviewStat">—</div><div class="stat-foot">Being assessed</div></article>
+        <article class="stat-card"><div class="stat-top"><span>Critical severity</span><span class="stat-symbol red">△</span></div><div class="stat-number" id="criticalStat">—</div><div class="stat-foot">Needs swift attention</div></article>
+      </div>
+      <section class="queue-card" id="queue">
+        <div class="queue-header"><div><h2>Report queue</h2><p>Review and manage vulnerability submissions</p></div><div class="queue-tools"><div class="search-box"><span>⌕</span><input id="search" placeholder="Search reports"></div><select id="filter"><option value="All">All reports</option><option>Submitted</option><option>In Review</option><option>Needs Info</option><option>Accepted</option><option>Resolved</option><option>Duplicate</option></select></div></div>
+        <div class="table-wrap"><table><thead><tr><th>REPORT</th><th>CATEGORY</th><th>SEVERITY</th><th>STATUS</th><th>REPORTED BY</th><th>UPDATED</th><th></th></tr></thead><tbody id="reportRows"><tr><td colspan="7" class="loading">Loading report queue…</td></tr></tbody></table></div>
+        <div class="table-footer"><span id="resultCount">—</span><span>Sample data is fictional and for demonstration only</span></div>
+      </section>
+      <footer><span>SignalDesk <b>·</b> Internal Vulnerability Disclosure</span><span><span class="green-dot"></span> Local demo workspace</span></footer>
+    </section>
+  </main>
+
+  <div class="modal-backdrop" id="modal" aria-hidden="true"><section class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle"><div class="modal-head"><div><div class="eyebrow">SAFE DISCLOSURE</div><h2 id="modalTitle">Submit a report</h2><p>Share a suspected issue from an authorized environment.</p></div><button class="close-button" id="closeModal" aria-label="Close">×</button></div><form id="reportForm"><label>Report title<input name="title" maxlength="100" required placeholder="e.g. Demo: test page reveals a banner"></label><label>Category<select name="category"><option>Authentication</option><option>Access Control</option><option>Information Exposure</option><option>Input Handling</option><option>Other</option></select></label><label>What did you observe?<textarea name="description" maxlength="2000" required rows="5" placeholder="Describe the fictional or authorized test scenario. Do not include passwords, personal data, or real targets."></textarea></label><div class="form-note"><span>i</span> Use only authorized systems. Never include secrets or personal data.</div><div class="modal-actions"><button type="button" class="secondary-button" id="cancelModal">Cancel</button><button class="primary-button" type="submit">Submit report <span>→</span></button></div></form></section></div>
+  <div class="detail-backdrop" id="detailModal" aria-hidden="true"><section class="detail-panel"><button class="close-button detail-close" id="closeDetail">×</button><div id="detailContent"></div></section></div>
+  <div class="toast" id="toast"></div>
+  <script src="{{ url_for('static', filename='app.js') }}"></script>
+</body>
+</html>
